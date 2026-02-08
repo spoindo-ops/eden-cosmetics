@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDEN | 프리미엄 자연주의 화장품</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #A2C2E1;
+            --secondary-green: #8DA17E;
+            --white: #FFFFFF;
+            --black: #000000;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-500: #ADB5BD;
+            --gray-800: #343A40;
+            --text-dark: #202020;
+            --transition-smooth: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-smooth);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 10px 0;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        .top-banner a {
+            text-decoration: underline;
+            margin-left: 10px;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+            transition: var(--transition-fast);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+        }
+
+        .gnb {
+            display: flex;
+            gap: 40px;
+        }
+
+        .gnb a {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .header-util {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .header-util a {
+            font-size: 14px;
+        }
+
+        /* Hero */
+        .main-hero {
+            position: relative;
+            height: 80vh;
+            /* 배경을 최대한 밝게(0.3 -> 0.15) 조정 */
+            background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url('hero_bg_v2.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            /* 좌측 정렬 */
+            padding-left: 10%;
+            /* 좌측 여백 */
+            color: var(--white);
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 72px;
+            font-weight: 300;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            color: var(--white);
+            /* 가독성 그림자 복구 */
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            letter-spacing: 0.05em;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Products list */
+        section.main-section {
+            padding: 120px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 44px;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--gray-500);
+            font-size: 16px;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px 20px;
+        }
+
+        .product-item {
+            cursor: pointer;
+        }
+
+        .product-thumb {
+            aspect-ratio: 1/1.2;
+            background-color: #D4E7FF;
+            /* 진한 하늘색 배경 */
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+            padding: 30px;
+            /* 제품과 배경 사이의 풍성한 여백 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .product-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 제품 본체만 강조하여 보여주는 스타일 (인포그래픽 크롭) */
+        .pouch-crop {
+            width: 210% !important;
+            /* 텍스트를 확실히 가리기 위해 배율 최적화 */
+            max-width: none !important;
+            object-position: 5% center !important;
+            /* 제품 위치 정밀 조정 */
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.08));
+            /* 입체감 강화 */
+        }
+
+        .product-item:hover .product-thumb img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--black);
+            color: white;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .product-info .brand {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--secondary-green);
+            margin-bottom: 8px;
+        }
+
+        .product-info .name {
+            font-size: 15px;
+            margin-bottom: 10px;
+            height: 45px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            /* 표준 속성 추가 */
+            -webkit-box-orient: vertical;
+        }
+
+        .product-info .price {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Product Detail Story */
+        .product-story {
+            background-color: #fff;
+            padding: 120px 0;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .story-group {
+            margin-bottom: 120px;
+        }
+
+        .story-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .story-flex {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            background-color: #fcfcfc;
+            padding: 60px;
+            border-radius: 20px;
+        }
+
+        .story-visual {
+            flex: 1;
+            height: 500px;
+            background-color: #D4E7FF;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        .story-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .story-content {
+            flex: 1.2;
+        }
+
+        .story-content h5 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .story-content .tags {
+            margin-bottom: 30px;
+            color: var(--secondary-green);
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .detail-info {
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+        }
+
+        .info-item .label {
+            font-weight: 700;
+            font-size: 14px;
+            color: #000;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .info-item .desc {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .story-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .story-title h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--secondary-green);
+        }
+
+        /* Banner Box */
+        .banner-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 100px;
+        }
+
+        .banner-item {
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+            color: var(--white);
+            position: relative;
+        }
+
+        .banner-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-item * {
+            z-index: 1;
+        }
+
+        .banner-item h3 {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .banner-item a {
+            display: inline-block;
+            padding-bottom: 5px;
+            border-bottom: 1px solid white;
+            font-size: 13px;
+            width: fit-content;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #fcfcfc;
+            padding: 80px 40px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            color: var(--black);
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 1024px) {
+            .product-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-inner {
+                padding: 0 20px;
+            }
+
+            .gnb {
+                display: none;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-inner {
+                flex-direction: column-reverse;
+                /* 모바일에서는 텍스트가 위, 이미지가 아래? or 반대 */
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                text-align: center;
+                margin-top: 40px;
+            }
+
+            .hero-image {
+                height: 50%;
+            }
+        }
+
+        /* Info Grid for Details */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .info-card {
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-card-img {
+            height: 320px;
+            /* 이미지가 더 잘 보일 수 있도록 높이 확대 */
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .info-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* 이미지 전체(한글 설명 포함)가 보이도록 설정 */
+            padding: 10px;
+        }
+
+        .info-card-text {
+            padding: 30px;
+        }
+
+        .info-card-text h6 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .info-card-text p {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+
+        /* 트러블 패치 강조 스타일 */
+        .patch-crop {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+            object-position: center !important;
+        }
+
+        @media (max-width: 768px) {
+            section.main-section {
+                padding: 60px 20px;
+            }
+
+            .main-hero {
+                height: 80vh;
+                /* 모바일 높이 유지 */
+            }
+
+            .main-hero h1 {
+                font-size: 40px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .product-list {
+                grid-template-columns: 1fr;
+                /* 모바일에서는 1열로 변경하여 시원하게 노출 */
+                gap: 40px;
+            }
+
+            .story-flex {
+                flex-direction: column;
+                gap: 40px;
+                padding: 30px 20px;
+            }
+
+            .story-visual {
+                height: 350px;
+                width: 100%;
+                padding: 20px;
+            }
+
+            .story-content h5 {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .story-content .tags {
+                text-align: center;
+                font-size: 13px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .banner-box {
+                grid-template-columns: 1fr;
+            }
+
+            .banner-item {
+                height: 300px;
+                padding: 40px;
+            }
+
+            .banner-item h3 {
+                font-size: 24px;
+            }
+
+            .review-gallery {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+        }
+
+        /* 리뷰 아이템 호버 효과 */
+        .review-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* 태블릿용 반응형 */
+        @media (max-width: 1024px) {
+            .review-gallery {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-banner">
+        지금 회원가입 하시면 <strong>10만원 쿠폰팩</strong> 즉시 증정! <a href="#">혜택 보기</a>
+    </div>
+
+    <header id="mainHeader">
+        <div class="header-inner">
+            <nav class="gnb">
+                <li><a href="#">브랜드 스토리</a></li>
+                <li><a href="#">멤버십 혜택</a></li>
+                <li><a href="#">모든 상품</a></li>
+                <li><a href="#">리얼 리뷰</a></li>
+                <li><a href="#">이벤트</a></li>
+            </nav>
+            <div class="header-util">
+                <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg></a>
+                <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg></a>
+                <a href="#" style="font-weight: 700; font-size: 13px;">로그인</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 메인 배너 이미지 영역 (구조 변경) -->
+        <section class="main-hero">
+            <div class="hero-text reveal">
+                <p
+                    style="letter-spacing: 0.3em; margin-bottom: 20px; color: #ffffff; font-weight: 700; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+                    NATURAL & SCIENCE</p>
+                <h1>맑고 깨끗한<br>내일의 아름다움,<br>EDEN</h1>
+                <p>자연의 생명력과 과학의 만남으로 탄생한<br>프리미엄 스킨케어를 경험하세요.</p>
+                <a href="#"
+                    style="background: transparent; color: white; padding: 15px 50px; display: inline-block; font-size: 14px; transition: all 0.3s; border: 1px solid white; font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">쇼핑하기</a>
+            </div>
+        </section>
+
+        <section class="main-section">
+            <div class="section-title reveal">
+                <h2>베스트 셀러</h2>
+                <p>가장 많은 사랑을 받은 EDEN Shopping Mall의 대표 제품들을 만나보세요</p>
+            </div>
+
+            <div class="product-list"
+                style="display: flex; justify-content: center; align-items: stretch; gap: 60px; flex-wrap: wrap;">
+                <!-- 상품 1: 에덴 백토 마스크 (왼쪽) -->
+                <a href="eden_mask_draft.html" class="product-item reveal"
+                    style="display: block; width: 320px; height: 500px; text-decoration: none;">
+                    <div class="product-thumb">
+                        <span class="product-badge">베스트</span>
+                        <img src="eden_mask_v2.png" alt="에덴 백토 마스크">
+                    </div>
+                    <div class="product-info">
+                        <p class="brand">EDEN</p>
+                        <p class="name">에덴 화이트 클레이 백토 마스크 (나를 위한 쉼)</p>
+                        <p class="price">6,000원</p>
+                    </div>
+                </a>
+
+                <!-- 추가 이미지: 5단계 피부 활력 솔루션 (오른쪽) -->
+                <div class="reveal"
+                    style="flex: 1; max-width: 800px; min-width: 300px; height: 500px; background-color: #D4E7FF; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;">
+                    <img src="에덴 백토마스크 5단계 피부활력 솔루션.png" alt="5단계 피부 활력 솔루션"
+                        style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px; display: block; mix-blend-mode: multiply; filter: brightness(1.15) saturate(0.85);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Details Section -->
+        <section class="product-story">
+            <div class="section-title reveal">
+                <h3
+                    style="font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; letter-spacing: 0.2em; margin-bottom: 100px;">
+                    제품 스토리</h3>
+            </div>
+
+            <!-- 1. 에덴 백토 마스크 상세 -->
+            <div class="story-group">
+                <div class="story-title reveal">
+                    <h4>01. EDEN 화이트 클레이 백토 마스크</h4>
+                </div>
+                <div class="story-container"
+                    style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 0;">
+                    <div class="story-image reveal"><img src="detail_1.png" alt="에덴 마스크팩 메인 설명" style="width: 100%;">
+                    </div>
+                    <div class="story-image reveal"><img src="detail_2.png" alt="백토의 효능" style="width: 100%;"></div>
+                    <div class="story-image reveal"><img src="detail_3.png" alt="3가지 에너지 과학" style="width: 100%;"></div>
+                    <div class="story-image reveal"><img src="detail_4.png" alt="강력한 흡착력" style="width: 100%;"></div>
+                    <div class="story-image reveal"><img src="detail_5.png" alt="4-in-1 토탈 케어" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+        <section class="main-section" style="padding-top: 0;">
+            <!-- 하단 브랜드 이미지 배너 영역 -->
+
+            <!-- 리얼 리뷰 / 고객 후기 섹션 -->
+            <div class="section-title reveal" style="margin-top: 120px;">
+                <h2>리얼 리뷰</h2>
+                <p>고객들이 직접 사용하고 남긴 생생한 후기를 확인해보세요</p>
+            </div>
+
+            <!-- 마스크팩 이미지 그리드 -->
+            <div class="review-gallery"
+                style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1400px; margin: 60px auto 0;">
+                <div class="review-item reveal"
+                    style="background-color: #D4E7FF; border-radius: 20px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease; cursor: pointer;">
+                    <img src="마스크팩 1.png" alt="마스크팩 리뷰 1"
+                        style="width: 100%; height: auto; border-radius: 15px; display: block;">
+                </div>
+                <div class="review-item reveal"
+                    style="background-color: #D4E7FF; border-radius: 20px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease; cursor: pointer;">
+                    <img src="마스크팩2.png" alt="마스크팩 리뷰 2"
+                        style="width: 100%; height: auto; border-radius: 15px; display: block;">
+                </div>
+                <div class="review-item reveal"
+                    style="background-color: #D4E7FF; border-radius: 20px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease; cursor: pointer;">
+                    <img src="마스크팩3.png" alt="마스크팩 리뷰 3"
+                        style="width: 100%; height: auto; border-radius: 15px; display: block;">
+                </div>
+                <div class="review-item reveal"
+                    style="background-color: #D4E7FF; border-radius: 20px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease; cursor: pointer;">
+                    <img src="마스크팩4.png" alt="마스크팩 리뷰 4"
+                        style="width: 100%; height: auto; border-radius: 15px; display: block;">
+                </div>
+            </div>
+
+            <div class="banner-box">
+                <div class="banner-item reveal"
+                    style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1000&auto=format&fit=crop');">
+                    <h3>EDEN<br>브랜드 철학</h3>
+                    <a href="#">브랜드 스토리 보기</a>
+                </div>
+                <div class="banner-item reveal"
+                    style="background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=1000&auto=format&fit=crop');">
+                    <h3>리얼 리뷰<br>고객 후기</h3>
+                    <a href="#">생생한 리뷰 확인</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 하단 상세정보 탭 섹션 -->
+        <section class="product-info-tabs" style="background-color: #f8f8f8; padding: 60px 0; margin-top: 120px;">
+            <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                <!-- 탭 메뉴 -->
+                <div class="tab-menu" style="display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 40px;">
+                    <button class="tab-button active" data-tab="detail"
+                        style="flex: 1; padding: 20px; background: none; border: none; font-size: 16px; font-weight: 600; color: #333; cursor: pointer; border-bottom: 3px solid #4A90E2; transition: all 0.3s;">
+                        상세정보
+                    </button>
+                    <button class="tab-button" data-tab="review"
+                        style="flex: 1; padding: 20px; background: none; border: none; font-size: 16px; font-weight: 600; color: #999; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s;">
+                        리뷰 <span style="color: #4A90E2;">12</span>
+                    </button>
+                    <button class="tab-button" data-tab="qna"
+                        style="flex: 1; padding: 20px; background: none; border: none; font-size: 16px; font-weight: 600; color: #999; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s;">
+                        Q&A <span style="color: #4A90E2;">0</span>
+                    </button>
+                    <button class="tab-button" data-tab="return"
+                        style="flex: 1; padding: 20px; background: none; border: none; font-size: 16px; font-weight: 600; color: #999; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s;">
+                        반품/교환정보
+                    </button>
+                </div>
+
+                <!-- 탭 컨텐츠 -->
+                <div class="tab-content">
+                    <!-- 상세정보 탭 -->
+                    <div class="tab-pane active" id="detail"
+                        style="display: block; padding: 40px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <h3 style="font-size: 24px; margin-bottom: 30px; color: #333;">상품정보 제공고시</h3>
+
+                        <!-- 정보 테이블 -->
+                        <table style="width: 100%; border-collapse: collapse; line-height: 1.8;">
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; width: 30%; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    내용물의 용량 및 중량</td>
+                                <td style="padding: 20px 15px; color: #666;">25ml</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    제품 주요사양</td>
+                                <td style="padding: 20px 15px; color: #666;">BSK305 EDEN 화이트클레이 백토마스크</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    사용기한 또는 개봉 후 사용기한</td>
+                                <td style="padding: 20px 15px; color: #666;">개봉후 즉시 사용</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    사용방법</td>
+                                <td style="padding: 20px 15px; color: #666;">
+                                    1. 토너로 피부를 정돈한 뒤 시트를 펴서 얼굴모양 맞게 붙여줍니다. 2. 10~20분후,마스크를 떼어내고 남은 앰플로를 가볍게 두드려 흡수시켜
+                                    줍니다. 3. 일주일에 2~3회, 4주간 연속적으로 사용하시는 것이 가장 효과적입니다.
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    화장품제조업자</td>
+                                <td style="padding: 20px 15px; color: #666;">아이록시코스메틱</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    제조국</td>
+                                <td style="padding: 20px 15px; color: #666;">한국</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    화장품책임판매업자</td>
+                                <td style="padding: 20px 15px; color: #666;">EDEN 화이트클레이</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    맞춤형 화장품판매업자</td>
+                                <td style="padding: 20px 15px; color: #666;">해당사항 없음</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    [화장품법]에 따라 기재 표시하여야 하는 모든 성분</td>
+                                <td style="padding: 20px 15px; color: #666;">
+                                    정제수,알로에베라겔,글리세린,트레할로스(올루나이앤아이오디드,베타인,알라토인주름클.트레할로스,콜라겐에보80,꿀가루,카본디,1,2-헥산디올,카르복
+                                    톨글리칸,스퀄란,다이아이로죽잎주출,톤판토민다이알릴수출물,콜란트인다이아루론산,칙피타감주출물,클바드나무잎추출물,콜맨비나무잎추출물,릴거나무잎추출물,호밀씨논아스트라시아허미디어이
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    [화장품법]에 따른 기능성 화장품머벅, 주름개선, 자외선 차단제품 등의 경우</td>
+                                <td style="padding: 20px 15px; color: #666;">유</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    사용할 때의 주의사항</td>
+                                <td style="padding: 20px 15px; color: #666;">
+                                    1)는 주의를 피하여 사용을 것. 간헐적을 사용시 또는 사용 후 직사광상에 의하여 사용부위가 붉은 반점, 부어오름 또는 가려움증 등의 이상증상이나
+                                    부작용이 있는 경우 전문의 등과 상담할 것. 2)상처가 있는 부위 등에는 사용을 피할 것. 3)보관 및 취급시의 주의사항 ㄱ)어린이의 손이 닿지 않는
+                                    곳에 보관할것 ㄴ)직사광선은 피해서 보관할것
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    품질보증기준</td>
+                                <td style="padding: 20px 15px; color: #666;">본 제품에 이상이 있을 경우, 공정거래 위원회 고시에 의거
+                                    보상해 드립니다.</td>
+                            </tr>
+                        </table>
+
+                        <!-- 소비자 상담 관련 전화번호 -->
+                        <div style="margin: 40px 0; padding: 20px; background-color: #f8f8f8; border-radius: 10px;">
+                            <h4 style="font-size: 16px; margin-bottom: 10px; color: #333;">소비자 상담 관련 전화번호</h4>
+                            <button onclick="alert('상담 전화번호: 1588-XXXX')"
+                                style="padding: 10px 20px; background-color: #4A90E2; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">상세정보
+                                확인</button>
+                        </div>
+
+                        <!-- 거래조건에 관한 정보 -->
+                        <h3 style="font-size: 24px; margin: 50px 0 30px; color: #333;">거래조건에 관한 정보</h3>
+
+                        <table style="width: 100%; border-collapse: collapse; line-height: 1.8;">
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; width: 50%; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    재화등의 배송방법에 관한 정보</td>
+                                <td style="padding: 20px 15px; color: #666;">택배</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    주문 이후 예상되는 배송기간</td>
+                                <td style="padding: 20px 15px; color: #666;">대금 지급일로부터 3일 이내에 발송</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    제품하자 오배송 등에 따른 청약철회 등의 경우 청약철회등의 기한 및 통신판매업자가 부담하는 반품비용 등에 관한 정보</td>
+                                <td style="padding: 20px 15px; color: #666;">상품상세 참조</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    제품하자가 아닌 소비자의 단순변심에 따른 청약철회 시 소비자가 부담하는 반품비용 등에 관한 정보</td>
+                                <td style="padding: 20px 15px; color: #666;">편도 3000원 (최초 배송비 무료인 경우 6000원 부과)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    제품하자가 아닌 소비자의 단순변심에 따른 청약철회가 불가능한 경우 그 구체적 사유와 근거</td>
+                                <td style="padding: 20px 15px; color: #666;">상품상세 참조</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    재화등의 교환·반품·보증 조건 및 품질보증기준</td>
+                                <td style="padding: 20px 15px; color: #666;">상품상세 참조</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333;">
+                                    재화등의 A/S 관련 전화번호</td>
+                                <td style="padding: 20px 15px; color: #666;">
+                                    <button onclick="alert('A/S 전화번호: 1588-XXXX')"
+                                        style="padding: 8px 16px; background-color: #4A90E2; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 13px;">상세정보
+                                        확인</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    대금을 환불받기 위한 방법과 환불이 지연될 경우 지연배상금을 지급받을 수 있다면 지연배상금 지급의 구체적인 조건 절차</td>
+                                <td style="padding: 20px 15px; color: #666;">상품상세 참조</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e0e0e0;">
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    소비자피해보상의 처리, 재화등에 대한 불만 처리 및 소비자와 사업자 사이의 분쟁처리에 관한 사항</td>
+                                <td style="padding: 20px 15px; color: #666;">상품상세 참조</td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="padding: 20px 15px; background-color: #f8f8f8; font-weight: 600; color: #333; vertical-align: top;">
+                                    거래에 관한 약관의 내용 또는 확인할 수 있는 방법</td>
+                                <td style="padding: 20px 15px; color: #666;">상품상세 페이지 및 페이지 하단의 이용약관 링크를 통해 확인할 수 있습니다.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- 리뷰 탭 -->
+                    <div class="tab-pane" id="review"
+                        style="display: none; padding: 40px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <h3 style="font-size: 24px; margin-bottom: 10px; color: #333;">상품리뷰</h3>
+                        <p style="color: #999; font-size: 14px; margin-bottom: 30px;">상품을 구매하신 분들이 작성하신 리뷰입니다. 리뷰 작성시 아래
+                            금액만큼 포인트가 적립됩니다.</p>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 40px;">
+                            <strong>텍스트 리뷰: 50원</strong> | <strong>포토/동영상 리뷰: 150원</strong>
+                        </p>
+
+                        <!-- 리뷰 통계 영역 -->
+                        <div
+                            style="display: flex; gap: 60px; padding: 40px; background: #f8f8f8; border-radius: 15px; margin-bottom: 40px; flex-wrap: wrap;">
+                            <!-- 사용자 총 평점 -->
+                            <div style="text-align: center; min-width: 200px;">
+                                <h4 style="font-size: 16px; color: #333; margin-bottom: 20px;">사용자 총 평점</h4>
+                                <div style="display: flex; gap: 5px; justify-content: center; margin-bottom: 15px;">
+                                    <span style="color: #FF4848; font-size: 32px;">★</span>
+                                    <span style="color: #FF4848; font-size: 32px;">★</span>
+                                    <span style="color: #FF4848; font-size: 32px;">★</span>
+                                    <span style="color: #FF4848; font-size: 32px;">★</span>
+                                    <span style="color: #FF4848; font-size: 32px;">★</span>
+                                </div>
+                                <div style="font-size: 48px; font-weight: 700; color: #333; margin-bottom: 5px;">
+                                    5.0<span style="font-size: 24px; color: #999;">/5</span></div>
+                            </div>
+
+                            <!-- 전체 리뷰수 -->
+                            <div style="text-align: center; min-width: 200px;">
+                                <h4 style="font-size: 16px; color: #333; margin-bottom: 20px;">전체 리뷰수</h4>
+                                <div style="margin: 20px 0;">
+                                    <svg width="80" height="80" viewBox="0 0 80 80"
+                                        style="display: block; margin: 0 auto;">
+                                        <circle cx="40" cy="40" r="35" stroke="#e0e0e0" stroke-width="6" fill="none" />
+                                        <circle cx="40" cy="40" r="35" stroke="#4A90E2" stroke-width="6" fill="none"
+                                            stroke-dasharray="220" stroke-dashoffset="0" stroke-linecap="round"
+                                            transform="rotate(-90 40 40)" />
+                                        <text x="40" y="45" text-anchor="middle" font-size="20" font-weight="700"
+                                            fill="#333">💬</text>
+                                    </svg>
+                                </div>
+                                <div style="font-size: 48px; font-weight: 700; color: #333;">12</div>
+                            </div>
+
+                            <!-- 평점 비율 -->
+                            <div style="flex: 1; min-width: 250px;">
+                                <h4 style="font-size: 16px; color: #333; margin-bottom: 20px;">평점 비율</h4>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span style="color: #FF4848; font-size: 18px; width: 30px;">5점</span>
+                                        <div
+                                            style="flex: 1; height: 8px; background: #e0e0e0; border-radius: 5px; position: relative;">
+                                            <div
+                                                style="position: absolute; height: 100%; background: #FF4848; border-radius: 5px; width: 100%;">
+                                            </div>
+                                        </div>
+                                        <span
+                                            style="width: 30px; text-align: right; color: #666; font-size: 14px;">12</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span style="color: #999; font-size: 18px; width: 30px;">4점</span>
+                                        <div style="flex: 1; height: 8px; background: #e0e0e0; border-radius: 5px;">
+                                        </div>
+                                        <span
+                                            style="width: 30px; text-align: right; color: #666; font-size: 14px;">0</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span style="color: #999; font-size: 18px; width: 30px;">3점</span>
+                                        <div style="flex: 1; height: 8px; background: #e0e0e0; border-radius: 5px;">
+                                        </div>
+                                        <span
+                                            style="width: 30px; text-align: right; color: #666; font-size: 14px;">0</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span style="color: #999; font-size: 18px; width: 30px;">2점</span>
+                                        <div style="flex: 1; height: 8px; background: #e0e0e0; border-radius: 5px;">
+                                        </div>
+                                        <span
+                                            style="width: 30px; text-align: right; color: #666; font-size: 14px;">0</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span style="color: #999; font-size: 18px; width: 30px;">1점</span>
+                                        <div style="flex: 1; height: 8px; background: #e0e0e0; border-radius: 5px;">
+                                        </div>
+                                        <span
+                                            style="width: 30px; text-align: right; color: #666; font-size: 14px;">0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 다른 구매자들은 이렇게 평가했어요 -->
+                            <div style="flex: 1; min-width: 300px;">
+                                <h4 style="font-size: 16px; color: #333; margin-bottom: 20px;">다른 구매자들은 이렇게 평가했어요</h4>
+                                <div style="display: flex; flex-direction: column; gap: 15px;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <button
+                                            style="padding: 8px 20px; border: 1px solid #4A90E2; background: white; color: #4A90E2; border-radius: 20px; font-size: 14px; cursor: pointer;">좋음요</button>
+                                        <span style="color: #666; font-size: 14px;">100% (12명)</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <button
+                                            style="padding: 8px 20px; border: 1px solid #e0e0e0; background: white; color: #666; border-radius: 20px; font-size: 14px; cursor: pointer;">드라마틱해요</button>
+                                        <span style="color: #666; font-size: 14px;">아주 좋아요 100% (12명)</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <button
+                                            style="padding: 8px 20px; border: 1px solid #e0e0e0; background: white; color: #666; border-radius: 20px; font-size: 14px; cursor: pointer;">파복친절</button>
+                                        <span style="color: #666; font-size: 14px;">뛰어나요 100% (12명)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- 리뷰 목록 영역 -->
+                        <div style="padding-top: 30px; border-top: 2px solid #e0e0e0;">
+                            <!-- 포토&동영상 섹션 -->
+                            <div style="margin-bottom: 50px;">
+                                <h4 style="font-size: 18px; color: #333; font-weight: 700; margin-bottom: 15px;">포토&동영상
+                                    6건</h4>
+                                <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;">
+                                    <!-- Image 1 (Main/Replacable) -->
+                                    <div
+                                        style="width: 120px; height: 120px; flex-shrink: 0; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer;">
+                                        <img src="photo_review_real.png" alt="Photo Review 1"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <!-- Image 2 -->
+                                    <div
+                                        style="width: 120px; height: 120px; flex-shrink: 0; background-color: #f0f0f0; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer;">
+                                        <div style="width: 100%; height: 100%; background: #e0e0e0;"></div>
+                                    </div>
+                                    <!-- Image 3 -->
+                                    <div
+                                        style="width: 120px; height: 120px; flex-shrink: 0; background-color: #f0f0f0; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer;">
+                                        <div style="width: 100%; height: 100%; background: #e0e0e0;"></div>
+                                    </div>
+                                    <!-- Image 4 -->
+                                    <div
+                                        style="width: 120px; height: 120px; flex-shrink: 0; background-color: #f0f0f0; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer;">
+                                        <div style="width: 100%; height: 100%; background: #e0e0e0;"></div>
+                                    </div>
+                                    <!-- Image 5 -->
+                                    <div
+                                        style="width: 120px; height: 120px; flex-shrink: 0; background-color: #f0f0f0; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer;">
+                                        <div style="width: 100%; height: 100%; background: #e0e0e0;"></div>
+                                    </div>
+                                    <!-- Image 6 -->
+                                    <div
+                                        style="width: 120px; height: 120px; flex-shrink: 0; background-color: #f0f0f0; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer;">
+                                        <div style="width: 100%; height: 100%; background: #e0e0e0;"></div>
+                                        <div
+                                            style="position: absolute; bottom: 0; right: 0; background: rgba(0,0,0,0.6); color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;">
+                                            6</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 리뷰 헤더 -->
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: #333; font-weight: 700;">리뷰 12건</h4>
+                                <div style="display: flex; gap: 15px; align-items: center;">
+                                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                        <input type="checkbox" checked style="width: 18px; height: 18px;">
+                                        <span style="font-size: 14px; color: #333;">평점순</span>
+                                    </label>
+                                    <span style="color: #ccc;">|</span>
+                                    <a href="#" style="color: #666; font-size: 14px; text-decoration: none;">최신순</a>
+                                    <a href="#" style="color: #666; font-size: 14px; text-decoration: none;">평점 높은순</a>
+                                    <a href="#" style="color: #666; font-size: 14px; text-decoration: none;">평점 낮은순</a>
+                                </div>
+                            </div>
+
+                            <!-- AI 리뷰요약 -->
+                            <div
+                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; margin-bottom: 30px; color: white;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                    <span style="font-size: 24px;">🤖</span>
+                                    <h5 style="font-size: 16px; font-weight: 700;">AI 리뷰요약</h5>
+                                    <span
+                                        style="font-size: 12px; background: rgba(255,255,255,0.3); padding: 3px 10px; border-radius: 10px;">?</span>
+                                </div>
+                                <p style="font-size: 14px; line-height: 1.8; opacity: 0.95;">
+                                    물광 효과가 있어요
+                                </p>
+                            </div>
+
+                            <!-- 필터 버튼들 -->
+                            <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
+                                <button
+                                    style="padding: 10px 20px; border: 1px solid #4A90E2; background: #4A90E2; color: white; border-radius: 20px; font-size: 14px; cursor: pointer; font-weight: 600;">
+                                    전체보기
+                                </button>
+                                <button
+                                    style="padding: 10px 20px; border: 1px solid #e0e0e0; background: white; color: #666; border-radius: 20px; font-size: 14px; cursor: pointer;">
+                                    포토/동영상
+                                </button>
+                                <button
+                                    style="padding: 10px 20px; border: 1px solid #e0e0e0; background: white; color: #666; border-radius: 20px; font-size: 14px; cursor: pointer;">
+                                    스토어PICK
+                                </button>
+                                <button
+                                    style="padding: 10px 20px; border: 1px solid #e0e0e0; background: white; color: #666; border-radius: 20px; font-size: 14px; cursor: pointer;">
+                                    한줄사용리뷰
+                                </button>
+                                <button
+                                    style="padding: 10px 20px; border: 1px solid #e0e0e0; background: white; color: #666; border-radius: 20px; font-size: 14px; cursor: pointer;">
+                                    재구매
+                                </button>
+                            </div>
+
+                            <!-- 리뷰 글래핑 시스템 안내 -->
+                            <div
+                                style="background: #f0f8ff; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #4A90E2;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="color: #4A90E2; font-size: 18px;">💡</span>
+                                    <p style="font-size: 14px; color: #333; margin: 0;">
+                                        <strong style="color: #4A90E2;">리뷰 글래핑 시스템</strong> 작동 중입니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 실제 리뷰 항목들 -->
+                            <div style="display: flex; flex-direction: column; gap: 25px;">
+                                <!-- 리뷰 1 -->
+                                <div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 25px;">
+                                    <div style="display: flex; gap: 15px;">
+                                        <div
+                                            style="width: 50px; height: 50px; background: #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                                            👤
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; gap: 3px; margin-bottom: 10px;">
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="font-weight: 700; color: #333; margin-left: 5px;">5</span>
+                                            </div>
+                                            <div
+                                                style="display: flex; gap: 15px; margin-bottom: 10px; font-size: 13px; color: #999;">
+                                                <span>aran****</span>
+                                                <span>25.01.11</span>
+                                                <span>신고</span>
+                                            </div>
+                                            <p style="color: #333; line-height: 1.8; font-size: 14px; margin: 15px 0;">
+                                                피부에 밀착이 잘되고 사용감이 좋아요. 꾸준히 사용하면 효과가 있을 것 같습니다.
+                                            </p>
+                                            <div
+                                                style="display: flex; gap: 20px; margin-top: 15px; font-size: 13px; color: #999;">
+                                                <button
+                                                    style="background: none; border: none; color: #999; cursor: pointer; font-size: 13px;">
+                                                    👍 도움돼요 0
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 리뷰 2 -->
+                                <div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 25px;">
+                                    <div style="display: flex; gap: 15px;">
+                                        <div
+                                            style="width: 50px; height: 50px; background: #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                                            👤
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; gap: 3px; margin-bottom: 10px;">
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="color: #FF4848; font-size: 16px;">★</span>
+                                                <span style="font-weight: 700; color: #333; margin-left: 5px;">5</span>
+                                            </div>
+                                            <div
+                                                style="display: flex; gap: 15px; margin-bottom: 10px; font-size: 13px; color: #999;">
+                                                <span>user****</span>
+                                                <span>25.01.08</span>
+                                                <span>신고</span>
+                                            </div>
+                                            <p style="color: #333; line-height: 1.8; font-size: 14px; margin: 15px 0;">
+                                                백토 마스크 정말 좋네요! 피부가 한층 밝아진 느낌이에요. 매주 사용하고 있습니다.
+                                            </p>
+                                            <div
+                                                style="display: flex; gap: 20px; margin-top: 15px; font-size: 13px; color: #999;">
+                                                <button
+                                                    style="background: none; border: none; color: #999; cursor: pointer; font-size: 13px;">
+                                                    👍 도움돼요 2
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 더보기 버튼 -->
+                                <div style="text-align: center; padding: 20px 0;">
+                                    <button
+                                        style="padding: 12px 40px; background: white; border: 2px solid #4A90E2; color: #4A90E2; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer;">
+                                        리뷰 더보기 (10개 남음)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q&A 탭 -->
+                    <div class="tab-pane" id="qna"
+                        style="display: none; padding: 40px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+
+                        <!-- Header & Description -->
+                        <h3 style="font-size: 24px; margin-bottom: 10px; color: #333; font-weight: 700;">Q&A</h3>
+                        <p style="color: #999; font-size: 14px; margin-bottom: 30px;">구매하시려는 상품에 대해 궁금한 점이 있으신 경우
+                            문의해주세요.</p>
+
+                        <!-- Action Bar -->
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 60px;">
+                            <div style="display: flex; gap: 10px;">
+                                <button
+                                    style="padding: 12px 20px; background: #333; color: white; border: none; font-size: 14px; cursor: pointer; font-weight: 600;">상품
+                                    Q&A 작성하기</button>
+                                <button
+                                    style="padding: 12px 20px; background: white; color: #666; border: 1px solid #ccc; font-size: 14px; cursor: pointer;">나의
+                                    Q&A 조회 ></button>
+                            </div>
+
+                            <div style="display: flex; align-items: center; gap: 20px;">
+                                <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                    <div
+                                        style="width: 20px; height: 20px; border: 1px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 12px;">
+                                        v</div>
+                                    <span style="font-size: 14px; color: #666;">비밀글 제외</span>
+                                </label>
+
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="font-size: 14px; color: #666;">내 Q&A 보기</span>
+                                    <div
+                                        style="width: 40px; height: 20px; background: #ccc; border-radius: 10px; position: relative; cursor: pointer;">
+                                        <div
+                                            style="width: 16px; height: 16px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px;">
+                                        </div>
+                                        <span
+                                            style="position: absolute; right: 5px; top: 2px; font-size: 10px; color: white;">OFF</span>
+                                    </div>
+                                </div>
+
+                                <div style="position: relative;">
+                                    <button
+                                        style="padding: 8px 15px; border: 1px solid #ccc; background: white; color: #333; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 20px;">
+                                        답변상태 <span style="font-size: 10px;">▼</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Empty State Message -->
+                        <div style="text-align: center; padding: 60px 0; border-bottom: 1px solid #eee;">
+                            <div
+                                style="width: 50px; height: 50px; border: 2px solid #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: #e0e0e0; font-size: 24px;">
+                                !</div>
+                            <p style="color: #999; font-size: 15px;">작성된 상품 Q&A가 없습니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- 반품/교환정보 탭 -->
+                    <div class="tab-pane" id="return"
+                        style="display: none; padding: 40px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <h3
+                            style="font-size: 24px; margin-bottom: 0; color: #333; font-weight: 700; padding-bottom: 15px;">
+                            반품/교환정보</h3>
+
+                        <!-- 반품/교환 안내 박스 -->
+                        <div style="border: 1px solid #e0e0e0; border-top: 2px solid #333; margin-bottom: 40px;">
+                            <div style="text-align: center; padding: 30px; border-bottom: 1px solid #eee;">
+                                <h4 style="font-size: 16px; color: #333; margin-bottom: 10px;">EDEN 화이트 클레이 반품/교환 안내
+                                </h4>
+                                <p style="font-size: 13px; color: #666; margin: 0;">반품 시 먼저 판매자와 연락하셔서 반품사유, 택배사, 배송비,
+                                    반품지 주소 등을 협의하신 후 반품상품을 발송해 주시기 바랍니다.</p>
+                            </div>
+
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <tr>
+                                    <td
+                                        style="width: 200px; background: #f9f9f9; padding: 15px; color: #333; font-weight: 600; border-bottom: 1px solid #eee;">
+                                        판매자 지정택배사</td>
+                                    <td style="padding: 15px; color: #666; border-bottom: 1px solid #eee;" colspan="3">
+                                        한진택배</td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="background: #f9f9f9; padding: 15px; color: #333; font-weight: 600; border-bottom: 1px solid #eee;">
+                                        반품배송비</td>
+                                    <td
+                                        style="padding: 15px; color: #666; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">
+                                        편도 3,000원 (최초 배송비 무료인 경우 6,000원 부과)</td>
+                                    <td
+                                        style="width: 150px; background: #f9f9f9; padding: 15px; color: #333; font-weight: 600; border-bottom: 1px solid #eee;">
+                                        교환배송비</td>
+                                    <td style="padding: 15px; color: #666; border-bottom: 1px solid #eee;">5,000원</td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="background: #f9f9f9; padding: 15px; color: #333; font-weight: 600; border-bottom: 1px solid #eee;">
+                                        보내실 곳</td>
+                                    <td style="padding: 15px; color: #666; border-bottom: 1px solid #eee;" colspan="3">
+                                        경북 영천시 금호읍 금창로 271번지(우: 38882)</td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="background: #f9f9f9; padding: 15px; color: #333; font-weight: 600; border-bottom: 1px solid #eee; vertical-align: top;">
+                                        반품/교환 사유에<br>따른 요청 가능 기간</td>
+                                    <td style="padding: 15px; color: #666; border-bottom: 1px solid #eee;" colspan="3">
+                                        <p style="margin-bottom: 10px;">구매자 단순 변심은 상품 수령 후 7일 이내 (구매자 반품배송비 부담)</p>
+                                        <p style="margin: 0;">표시/광고와 상이, 계약 내용과 다르게 이행된 경우 상품 수령 후 3개월 이내 혹은 표시/광고와 다른
+                                            사실을 안 날로부터 30일 이내 (판매자 반품 배송비 부담)<br>둘 중 하나 경과 시 반품/교환 불가</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="background: #f9f9f9; padding: 15px; color: #333; font-weight: 600; vertical-align: top;">
+                                        반품/교환 불가능<br>사유</td>
+                                    <td style="padding: 15px; color: #666;" colspan="3">
+                                        <ol style="padding-left: 20px; margin: 0; line-height: 1.6;">
+                                            <li>반품요청기간이 지난 경우</li>
+                                            <li>구매자의 책임 있는 사유로 상품 등이 멸실 또는 훼손된 경우 (단, 상품의 내용을 확인하기 위하여 포장 등을 훼손한 경우는 제외)
+                                            </li>
+                                            <li>구매자의 책임있는 사유로 포장이 훼손되어 상품 가치가 현저히 상실된 경우 (예: 식품, 화장품, 향수류, 음반 등)</li>
+                                            <li>구매자의 사용 또는 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우 (라벨이 떨어진 의류 또는 태그가 떨어진 명품관 상품인
+                                                경우)</li>
+                                            <li>시간의 경과에 의하여 재판매가 곤란할 정도로 상품 등의 가치가 현저히 감소한 경우</li>
+                                            <li>고객의 요청사항에 맞춰 제작에 들어가는 맞춤제작상품의 경우 (판매자에게 회복불가능한 손해가 예상되고, 그러한 예정으로 청약철회권
+                                                행사가 불가하다는 사실을 서면 등의 받은 경우)</li>
+                                            <li>복제가 가능한 상품 등의 포장을 훼손한 경우 (CD/DVD/GAME/도서의 경우 포장 개봉 시)</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- 판매자정보 섹션 -->
+                        <div
+                            style="display: flex; gap: 20px; margin-bottom: 0; border-top: 2px solid #333; padding-top: 20px;">
+                            <div style="padding: 15px 20px; font-weight: 700; color: #333;">
+                                판매자정보</div>
+                        </div>
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px;">
+                            <tr>
+                                <td
+                                    style="width: 200px; background: #f9f9f9; padding: 15px; color: #333; font-weight: 600; border-bottom: 1px solid #eee;">
+                                    상호명</td>
+                                <td style="padding: 15px; color: #666; border-bottom: 1px solid #eee; width: 400px;">
+                                    EDEN 화이트컬레이(EDEN White Clay)</td>
+                                <td
+                                    style="width: 150px; background: #f9f9f9; padding: 15px; color: #333; font-weight: 600; border-bottom: 1px solid #eee;">
+                                    대표자</td>
+                                <td style="padding: 15px; color: #666; border-bottom: 1px solid #eee;">손성헌</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <h4 class="footer-logo">EDEN</h4>
+                <p>서울특별시 강남구 테헤란로 EDEN 컴퍼니</p>
+                <p>고객센터: 1544-0000</p>
+                <p>평일 10:00 - 17:00 (점심시간 12:30 - 13:30 / 토, 일, 공휴일 휴무)</p>
+            </div>
+            <div>
+                <p style="font-weight: 700; margin-bottom: 20px; color: #000;">쇼핑가이드</p>
+                <p>주문 목록</p>
+                <p>장바구니</p>
+                <p>관심 상품</p>
+            </div>
+            <div>
+                <p style="font-weight: 700; margin-bottom: 20px; color: #000;">고객지원</p>
+                <p>이용약관</p>
+                <p>개인정보처리방침</p>
+                <p>회사소개</p>
+            </div>
+            <div>
+                <p style="font-weight: 700; margin-bottom: 20px; color: #000;">뉴스레터</p>
+                <p>에덴의 새로운 소식과 혜택을 받아보세요.</p>
+                <div style="border-bottom: 1px solid #ccc; margin-top: 20px; padding-bottom: 5px; display: flex;">
+                    <input type="text" placeholder="이메일 주소"
+                        style="border: none; outline: none; flex: 1; background: transparent;">
+                    <button style="border: none; background: none; font-weight: 700; font-size: 11px;">구독하기</button>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 50px; text-align: center; color: #bbb; font-size: 11px;">
+            &copy; 2026 EDEN. 모든 권리 보유.
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute('data-tab');
+
+                // Remove active class from all buttons and panes
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.style.color = '#999';
+                    btn.style.borderBottom = '3px solid transparent';
+                });
+                tabPanes.forEach(pane => {
+                    pane.classList.remove('active');
+                    pane.style.display = 'none';
+                });
+
+                // Add active class to clicked button and corresponding pane
+                button.classList.add('active');
+                button.style.color = '#333';
+                button.style.borderBottom = '3px solid #4A90E2';
+                document.getElementById(targetTab).classList.add('active');
+                document.getElementById(targetTab).style.display = 'block';
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.style.height = '70px';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.height = '90px';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+
+</html>
